@@ -1,49 +1,71 @@
-name: Deploy to GitHub Pages
+name: Release & Deploy
 
 on:
-  push:
-    branches: 'main'
+  pull_request:
+    branches: main
+    types: [closed]
 
 jobs:
-  build_site:
+  release:
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+    permissions:
+      contents: write
+      issues: write
+      pull-requests: write
+      id-token: write
 
-      - name: Install Node.js
-        uses: actions/setup-node@v4
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: actions/setup-node@v4
         with:
           node-version: 24
           cache: npm
 
-      - name: Install dependencies
-        run: npm i
+      - run: npm ci
 
-      - name: build
+      - name: Release
         env:
-          BASE_PATH: '/${{ github.event.repository.name }}'
-        run: |
-          npm run build
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: npx semantic-release
 
-      - name: Upload Artifacts
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: 'dist/'
-
-  deploy:
-    needs: build_site
+  build:
+    needs: release
     runs-on: ubuntu-latest
 
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - run: npm ci
+
+      - name: Build
+        env:
+          BASE_PATH: '/${{ github.event.repository.name }}'
+        run: npm run build
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist/
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
     permissions:
       pages: write
       id-token: write
-
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-
     steps:
-      - name: Deploy
-        id: deployment
-        uses: actions/deploy-pages@v4
+      - uses: actions/deploy-pages@v4
