@@ -27,15 +27,16 @@ export default defineConfig({
 		router(),
 		VitePWA({
 			registerType: 'autoUpdate',
-			injectRegister: false,
+			injectRegister: 'auto',
 			pwaAssets: { disabled: false, config: true },
 			manifest: {
+				display: 'standalone',
 				scope: process.env.BASE_PATH,
 				start_url: process.env.BASE_PATH,
 				name: process.env.npm_package_name,
 				short_name: process.env.npm_package_name,
 				description: process.env.npm_package_description,
-				theme_color: '#000000',
+				theme_color: '#0a0a0a',
 			},
 			workbox: {
 				globPatterns: ['**/*.{js,css,html,svg,png,ico}'],
