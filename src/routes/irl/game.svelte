@@ -1,7 +1,10 @@
 <script lang="ts">
+	import { navigate } from 'sv-router/generated';
 	import { onDestroy } from 'svelte';
 
 	import { lobby } from '@/stores/lobby.store';
+
+	if (!$lobby.location) navigate('/irl');
 
 	let index = $state(0);
 

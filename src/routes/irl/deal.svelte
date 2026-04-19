@@ -6,6 +6,8 @@
 	import { presets } from '@/stores/presets.store';
 	import { lobby } from '@/stores/lobby.store';
 
+	if (!$lobby.playerCount()) navigate('/irl');
+
 	let index = $state(0);
 	let revealed = $state(false);
 
