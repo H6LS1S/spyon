@@ -9,7 +9,7 @@
 
 <main class="container mx-auto flex h-full flex-col gap-3 px-6">
 	{#each PRESETS as preset (preset.id)}
-		{@const active = $presets.selected.includes(preset.id)}
+		{@const active = $presets.selected[preset.id]}
 		{@const open = expanded[preset.id]}
 
 		<div class="border border-border">

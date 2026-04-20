@@ -50,7 +50,12 @@
 <Router base={__BASE_PATH__} />
 
 <footer class="flex flex-col items-center">
-	<span class=" pt-3 text-xs text-muted-foreground">
+	<a
+		href={__RELEASES_URL__}
+		target="_blank"
+		rel="noopener noreferrer"
+		class="pt-3 text-xs text-muted-foreground"
+	>
 		v{__APP_VERSION__}
-	</span>
+	</a>
 </footer>

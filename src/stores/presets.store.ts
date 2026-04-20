@@ -54,19 +54,19 @@ export const PRESETS: Preset[] = [
 ];
 
 export class PresetsStore extends SvelteStore {
-	@Prop({ default: ['classic'] })
-	public selected: string[];
+	@Prop({ default: { classic: true } })
+	public selected: Record<string, boolean>;
 
 	@Derived()
 	public locations(): GameLocation[] {
-		return PRESETS.filter((p) => this.selected.includes(p.id)).flatMap((p) => p.locations);
+		return PRESETS.filter((p) => this.selected[p.id]).flatMap((p) => p.locations);
 	}
 
 	public toggle(id: string) {
-		this.update((s) => ({
-			...s,
-			selected: s.selected.includes(id) ? s.selected.filter((x) => x !== id) : [...s.selected, id],
-		}));
+		this.update((s) => {
+			const selected = { ...s.selected, [id]: !s.selected[id] };
+			return Object.values(selected).some(Boolean) ? { ...s, selected } : s;
+		});
 	}
 
 	@Derived()
