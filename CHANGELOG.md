@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/H6LS1S/spyon/compare/v1.0.0...v1.0.1) (2026-04-20)
+
+
+### Bug Fixes
+
+* **irl/game:** a game without an initial setup ([38f7d35](https://github.com/H6LS1S/spyon/commit/38f7d35b1e4359c83d4a60f38da8afe22e1a4b7b))
+
 # 1.0.0 (2026-04-17)
 
 
