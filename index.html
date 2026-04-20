@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="uk" data-theme="dark">
+<html lang="uk">
 	<head>
 		<meta charset="UTF-8" />
 		<meta
@@ -16,7 +16,17 @@
 
 		<title>__APP_NAME__</title>
 	</head>
+
 	<body id="app">
+		<script>
+			const saved = localStorage.getItem('theme');
+			const dark = saved
+				? saved === 'dark'
+				: window.matchMedia('(prefers-color-scheme: dark)').matches;
+			if (!saved) localStorage.setItem('theme', dark ? 'dark' : 'light');
+			document.documentElement.classList.toggle('dark', dark);
+		</script>
+
 		<script type="module" src="/src/main.ts"></script>
 	</body>
 </html>

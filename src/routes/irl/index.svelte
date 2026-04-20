@@ -3,8 +3,8 @@
 
 	import { p } from 'sv-router/generated';
 
-	import { lobby, VoteMode } from '@/stores/lobby.store';
 	import { Button, Switch, Label, Input } from '@/lib';
+	import { lobby } from '@/stores/lobby.store';
 
 	const handleKeydown = (e: KeyboardEvent) => {
 		const target = e.target as HTMLInputElement;
@@ -17,12 +17,12 @@
 </script>
 
 <main class="container mx-auto flex h-full flex-col gap-6 overflow-hidden px-6">
-	<div class="grid gap-3">
+	<div class="flex flex-col gap-3">
 		<Label>Шпигунів — {$lobby.spies}</Label>
 		<Input type="number" min={1} bind:value={$lobby.spies} />
 	</div>
 
-	<div class="grid gap-3">
+	<div class="flex flex-col gap-3">
 		<Label>Тривалість ходу — {$lobby.duration} секунд</Label>
 		<Input type="number" min={1} bind:value={$lobby.duration} />
 	</div>

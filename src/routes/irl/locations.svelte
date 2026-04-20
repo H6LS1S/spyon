@@ -12,10 +12,10 @@
 		{@const active = $presets.selected[preset.id]}
 		{@const open = expanded[preset.id]}
 
-		<div class="border border-border">
+		<div class="border">
 			<div class="flex items-center">
 				<button
-					class="flex h-10 w-10 items-center justify-center border-r border-border transition-colors"
+					class="flex h-10 w-10 items-center justify-center border-r transition-colors"
 					class:bg-primary={active}
 					class:text-primary-foreground={active}
 					class:text-transparent={!active}
@@ -30,11 +30,9 @@
 			</div>
 
 			{#if open}
-				<div class="border-t border-border">
+				<div class="border-t">
 					{#each preset.locations as loc, i (i)}
-						<div
-							class="flex items-center justify-between border-b border-border p-4 last:border-b-0"
-						>
+						<div class="flex items-center justify-between border-b p-4 last:border-b-0">
 							<span class="text-sm">{loc.name}</span>
 							<span class="text-xs text-muted-foreground">
 								{loc.roles.slice(0, 4).join(', ')}…

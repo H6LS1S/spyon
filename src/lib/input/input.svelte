@@ -1,15 +1,13 @@
 <script lang="ts">
 	import { cn } from '@/lib/utils';
 
-	let {
-		class: className = '',
-		value = $bindable(),
-		...rest
-	}: {
+	export interface InputProps {
 		class?: string;
 		value?: string | number;
 		[key: string]: unknown;
-	} = $props();
+	}
+
+	let { class: className = '', value = $bindable(), ...rest }: InputProps = $props();
 </script>
 
 <input
