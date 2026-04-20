@@ -1,15 +1,13 @@
 <script lang="ts">
 	import { cn } from '@/lib/utils';
 
-	let {
-		class: className = '',
-		for: htmlFor,
-		children,
-	}: {
+	export interface LabelProps {
 		class?: string;
 		for?: string;
 		children?: import('svelte').Snippet;
-	} = $props();
+	}
+
+	let { class: className = '', for: htmlFor, children }: LabelProps = $props();
 </script>
 
 <label for={htmlFor} class={cn('text-sm font-medium', className)}>

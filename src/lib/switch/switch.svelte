@@ -1,15 +1,17 @@
 <script lang="ts">
+	export interface SwitchProps {
+		id?: string;
+		checked?: boolean;
+		label?: string;
+		onCheckedChange?: (v: boolean) => void;
+	}
+
 	let {
 		id,
 		checked = $bindable(false),
 		label = 'Toggle switch',
 		onCheckedChange,
-	}: {
-		id?: string;
-		checked?: boolean;
-		label?: string;
-		onCheckedChange?: (v: boolean) => void;
-	} = $props();
+	}: SwitchProps = $props();
 
 	const toggle = () => {
 		checked = !checked;

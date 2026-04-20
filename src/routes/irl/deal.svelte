@@ -15,7 +15,7 @@
 
 	const roles = $lobby.getRandomRoles();
 
-	const names = $derived(Object.keys($lobby.players));
+	const names = Object.keys($lobby.players);
 	const spyNames = $derived(names.filter((_, i) => roles[i] === null));
 	const otherSpies = $derived(spyNames.filter((n) => n !== names[index]));
 

@@ -10,7 +10,7 @@
 
 	$lobby.paused = false;
 
-	const names = $derived(Object.keys($lobby.players));
+	const names = Object.keys($lobby.players);
 	const interval = setInterval(() => {
 		if ($lobby.paused) return;
 		const p = $lobby.players[names[index]];
