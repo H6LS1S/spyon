@@ -1,6 +1,6 @@
 import { SvelteStore, Prop, Derived } from 'sveltejs-typestore';
 
-import type { GameLocation } from '@/stores/presets.store';
+import type { GameLocation } from '@/stores';
 
 export enum VoteMode {
 	ANYTIME = 'ANYTIME',

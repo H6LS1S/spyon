@@ -2,7 +2,7 @@
 	import { navigate } from 'sv-router/generated';
 	import { onDestroy } from 'svelte';
 
-	import { lobby } from '@/stores/lobby.store';
+	import { lobby } from '@/stores';
 
 	if (!$lobby.location) navigate('/irl');
 

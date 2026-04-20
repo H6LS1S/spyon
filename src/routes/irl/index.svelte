@@ -4,7 +4,7 @@
 	import { p } from 'sv-router/generated';
 
 	import { Button, Switch, Label, Input } from '@/lib';
-	import { lobby } from '@/stores/lobby.store';
+	import { lobby } from '@/stores';
 
 	const handleKeydown = (e: KeyboardEvent) => {
 		const target = e.target as HTMLInputElement;

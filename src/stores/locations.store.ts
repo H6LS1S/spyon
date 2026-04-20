@@ -6,14 +6,12 @@ export class GameLocation {
 }
 
 export interface Preset {
-	id: string;
 	name: string;
 	locations: GameLocation[];
 }
 
 export const PRESETS: Preset[] = [
 	{
-		id: 'classic',
 		name: 'Класичний',
 		locations: [
 			{ name: 'Аеропорт', roles: ['Пілот', 'Стюардеса', 'Пасажир', 'Митник', 'Механік'] },
@@ -29,7 +27,6 @@ export const PRESETS: Preset[] = [
 		],
 	},
 	{
-		id: 'fantasy',
 		name: 'Фентезі',
 		locations: [
 			{ name: 'Таверна', roles: ['Бармен', 'Мандрівник', 'Бард', 'Охоронець'] },
@@ -41,7 +38,6 @@ export const PRESETS: Preset[] = [
 		],
 	},
 	{
-		id: 'space',
 		name: 'Космос',
 		locations: [
 			{ name: 'Станція', roles: ['Командир', 'Інженер', 'Вчений', 'Медик'] },
@@ -53,20 +49,13 @@ export const PRESETS: Preset[] = [
 	},
 ];
 
-export class PresetsStore extends SvelteStore {
+export class LocationsStore extends SvelteStore {
 	@Prop({ default: { classic: true } })
 	public selected: Record<string, boolean>;
 
 	@Derived()
 	public locations(): GameLocation[] {
-		return PRESETS.filter((p) => this.selected[p.id]).flatMap((p) => p.locations);
-	}
-
-	public toggle(id: string) {
-		this.update((s) => {
-			const selected = { ...s.selected, [id]: !s.selected[id] };
-			return Object.values(selected).some(Boolean) ? { ...s, selected } : s;
-		});
+		return PRESETS.filter((p) => this.selected[p.name]).flatMap((p) => p.locations);
 	}
 
 	@Derived()
@@ -74,6 +63,13 @@ export class PresetsStore extends SvelteStore {
 		const locs = this.locations();
 		return locs[Math.floor(Math.random() * locs.length)];
 	}
+
+	public toggle(name: string) {
+		this.update((s) => {
+			const selected = { ...s.selected, [name]: !s.selected[name] };
+			return Object.values(selected).some(Boolean) ? { ...s, selected } : s;
+		});
+	}
 }
 
-export const presets = new PresetsStore();
+export const locations = new LocationsStore();

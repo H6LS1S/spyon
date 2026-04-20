@@ -3,15 +3,14 @@
 
 	import { navigate } from 'sv-router/generated';
 
-	import { presets } from '@/stores/presets.store';
-	import { lobby } from '@/stores/lobby.store';
+	import { locations, lobby } from '@/stores';
 
 	if (!$lobby.playerCount()) navigate('/irl');
 
 	let index = $state(0);
 	let revealed = $state(false);
 
-	$lobby.location = $presets.randomLocation();
+	$lobby.location = $locations.randomLocation();
 
 	const roles = $lobby.getRandomRoles();
 

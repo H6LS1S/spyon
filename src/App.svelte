@@ -5,7 +5,7 @@
 	import { navigate, route } from 'sv-router/generated';
 	import { Button } from '@/lib/button';
 
-	import { lobby } from '@/stores/lobby.store';
+	import { lobby } from '@/stores';
 
 	let theme = $state(localStorage.getItem('theme') === 'dark');
 
